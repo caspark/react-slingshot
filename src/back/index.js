@@ -7,6 +7,12 @@ if (process.argv.length <= 2) {
     process.exit(-1);
 }
 
+process.on('SIGINT', function() {
+    // explicit SIGINT handler seems to be required when running in Docker: https://github.com/nodejs/node/issues/4182
+    console.log("Received SIGINT, exiting.");
+    process.exit();
+});
+
 const PORT = process.argv[2];
 
 let app = express();

@@ -56,7 +56,8 @@ Babel as well.
 
 Or if you like Docker, you can do:
 
-    npm run docker:build
+    npm run docker:build  # build a docker image and tag it with the name of the package
+    npm run docker:run    # run the previously built and tagged docker image in a container named after the package
 
 ## Initial Machine Setup
 
