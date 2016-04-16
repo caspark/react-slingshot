@@ -1,0 +1,14 @@
+[ignore]
+; don't worry about type-checking the build output
+<PROJECT_ROOT>/dist/
+; there are a few modules with (it seems) intentionally broken test code
+<PROJECT_ROOT>/node_modules/.*test.*
+; fbjs has a bunch of flow errors, which is weird since it's supposed to use flow itself
+<PROJECT_ROOT>/node_modules/fbjs/.*
+
+[include]
+; the whole root directory is automatically included
+
+[libs]
+
+[options]

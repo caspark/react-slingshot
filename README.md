@@ -9,6 +9,7 @@ Significant changes:
 * Use webpack dev server in development rather than browser-sync to make things a bit simpler
 * Add a back-end API server
 * Support deployment via Docker
+* Add in [Flow](http://flowtype.org/) for static type checking
 
 Development
 -----------

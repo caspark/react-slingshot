@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prestart": "npm-run-all --parallel remove-dist lint:tools",
-    "start": "npm-run-all --parallel test:watch serve:front-dev serve:back-dev",
+    "start": "npm-run-all --parallel watch-flow-and-tests serve:front-dev serve:back-dev",
     "serve:back-dev": "nodemon --quiet --watch src/back --exec babel-node -- src/back/index.js $npm_package_config_backend_port",
     "serve:front-dev": "babel-node node_modules/.bin/webpack-dev-server",
     "start:dist": "npm run build && cd dist && npm run serve:dist",
@@ -23,9 +23,10 @@
     "docker:build": "npm run build && cp Dockerfile dist/ && docker build -t $npm_package_name dist/",
     "docker:run": "docker run --rm -it --name $npm_package_name $npm_package_name",
     "docker:ip": "docker inspect --format '{{ .NetworkSettings.IPAddress }}' $npm_package_name",
+    "flow:true": "echo 'Checking for type errors with flow...' && flow status || true",
     "lint:tools": "eslint webpack.config.js tools",
-    "test": "mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
-    "test:watch": "npm run test -- --watch"
+    "test": "echo 'Running tests via mocha' && mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
+    "watch-flow-and-tests": "nodemon --quiet --watch src --exec \"npm run flow:true && npm run test\""
   },
   "author": "Cory House",
   "license": "MIT",
@@ -61,6 +62,7 @@
     "eslint-plugin-react": "4.3.0",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "flow-bin": "0.23.0",
     "mocha": "2.4.5",
     "node-sass": "3.4.2",
     "nodemon": "1.9.1",
