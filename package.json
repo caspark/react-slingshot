@@ -9,10 +9,9 @@
     "serve:dev": "babel-node node_modules/.bin/webpack-dev-server",
     "serve:dist": "http-server dist/ -p 3000 -c-1",
     "lint:tools": "eslint webpack.config.js tools",
-    "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
     "build:html": "babel-node tools/buildHtml.js",
-    "prebuild": "npm run clean-dist && npm run build:html",
+    "prebuild": "npm run remove-dist && mkdir dist && npm run build:html",
     "build": "NODE_ENV=production babel-node node_modules/.bin/webpack --progress",
     "test": "mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
     "test:watch": "npm run test -- --watch"
