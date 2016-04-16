@@ -18,5 +18,17 @@ browserSync({
     'src/*.html'
   ],
 
+  // don't try to mirror inputs between browsers
+  ghostMode: false,
+
+  // switch off distracting log output on startup
+  logLevel: "silent",
+
+  // we don't need any of browser-sync's online features, so pretend we're offline
+  online: false,
+
+  // don't open a browser to the url automatically
+  open: false,
+
   middleware: [historyApiFallback()]
 });

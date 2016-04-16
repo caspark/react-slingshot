@@ -40,6 +40,18 @@ browserSync({
     ]
   },
 
+  // don't try to mirror inputs between browsers
+  ghostMode: false,
+
+  // switch off distracting log output on startup
+  logLevel: "silent",
+
+  // we don't need any of browser-sync's online features, so pretend we're offline
+  online: false,
+
+  // don't open a browser to the url automatically
+  open: false,
+
   // no need to watch '*.js' here, webpack will take care of it for us,
   // including full page reloads if HMR won't work
   files: [
