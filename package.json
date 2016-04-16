@@ -19,6 +19,7 @@
     "build:back": "NODE_ENV=production babel src/back/index.js > dist/index.js",
     "build:html": "babel-node tools/buildHtml.js",
     "build:front": "NODE_ENV=production babel-node node_modules/.bin/webpack --progress",
+    "docker:build": "npm run build && docker build -t $npm_package_name .",
     "lint:tools": "eslint webpack.config.js tools",
     "test": "mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
     "test:watch": "npm run test -- --watch"

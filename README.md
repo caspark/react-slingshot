@@ -54,7 +54,12 @@ functionality.)
 All minimisation/compilation/transpilation of the front-end is done by webpack, and the back-end is transpiled using
 Babel as well.
 
+Or if you like Docker, you can do:
+
+    npm run docker:build
+
 ## Initial Machine Setup
+
 **Install [Node 5.x using nvm](https://nodejs.org)**. After installing nvm, do:
 
     nvm install 5
