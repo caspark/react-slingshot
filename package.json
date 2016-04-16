@@ -11,15 +11,16 @@
     "start": "npm-run-all --parallel test:watch serve:front-dev serve:back-dev",
     "serve:back-dev": "nodemon --quiet --watch src/back --exec babel-node -- src/back/index.js $npm_package_config_backend_port",
     "serve:front-dev": "babel-node node_modules/.bin/webpack-dev-server",
-    "start:dist": "npm run build && npm run serve:dist",
-    "serve:dist": "node dist/index.js $npm_package_config_frontend_port",
+    "start:dist": "npm run build && cd dist && npm run serve:dist",
+    "serve:dist": "node index.js $npm_package_config_frontend_port",
     "remove-dist": "rimraf ./dist",
     "prebuild": "npm run remove-dist && mkdir -p dist/assets",
-    "build": "npm-run-all --parallel build:back build:html build:front",
+    "build": "npm-run-all --parallel build:back build:html build:front build:packages",
     "build:back": "NODE_ENV=production babel src/back/index.js > dist/index.js",
     "build:html": "babel-node tools/buildHtml.js",
     "build:front": "NODE_ENV=production babel-node node_modules/.bin/webpack --progress",
-    "docker:build": "npm run build && docker build -t $npm_package_name .",
+    "build:packages": "npm shrinkwrap && mv npm-shrinkwrap.json dist/ && cp package.json dist/ && npm install --prefix dist/ --production",
+    "docker:build": "npm run build && cp Dockerfile dist/ && docker build -t $npm_package_name dist/",
     "docker:run": "docker run --rm -it --name $npm_package_name $npm_package_name",
     "docker:ip": "docker inspect --format '{{ .NetworkSettings.IPAddress }}' $npm_package_name",
     "lint:tools": "eslint webpack.config.js tools",
@@ -30,6 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "connect-history-api-fallback": "1.2.0",
+    "express": "4.13.4",
     "object-assign": "4.0.1",
     "react": "15.0.1",
     "react-dom": "15.0.1",
@@ -57,7 +59,6 @@
     "eslint-loader": "1.3.0",
     "eslint-plugin-import": "1.4.0",
     "eslint-plugin-react": "4.3.0",
-    "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
     "http-server": "0.9.0",
@@ -74,23 +75,8 @@
     "webpack": "1.13.0",
     "webpack-dev-server": "1.14.1"
   },
-  "keywords:": [
-    "react",
-    "reactjs",
-    "react-router",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack",
-    "redux",
-    "flux",
-    "boilerplate",
-    "starter"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/coryhouse/react-slingshot"
+    "url": "https://github.com/caspark/react-slingshot"
   }
 }

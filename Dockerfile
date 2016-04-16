@@ -1,7 +1,6 @@
 FROM mhart/alpine-node:base-5
 
-ADD node_modules/ /dist/node_modules
-ADD dist/ /dist
+ADD . /dist
 
 WORKDIR /dist
 EXPOSE 3000
