@@ -19,7 +19,7 @@
     "build:back": "NODE_ENV=production babel src/back/index.js > dist/index.js",
     "build:html": "babel-node tools/buildHtml.js",
     "build:front": "NODE_ENV=production babel-node node_modules/.bin/webpack --progress",
-    "build:packages": "npm shrinkwrap && mv npm-shrinkwrap.json dist/ && cp package.json dist/ && npm install --prefix dist/ --production",
+    "build:packages": "cp package.json dist/ && npm install --prefix dist/ --production",
     "docker:build": "npm run build && cp Dockerfile dist/ && docker build -t $npm_package_name dist/",
     "docker:run": "docker run --rm -it --name $npm_package_name $npm_package_name",
     "docker:ip": "docker inspect --format '{{ .NetworkSettings.IPAddress }}' $npm_package_name",
