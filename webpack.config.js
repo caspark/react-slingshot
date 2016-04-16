@@ -14,7 +14,8 @@ if (process.env.NODE_ENV == 'production') {
   console.log('Using DEVELOPMENT mode settings for Webpack; set NODE_ENV=production to use production settings');
 }
 
-const DEVSERVER_PORT = 3000;
+const DEVSERVER_PORT = process.env.npm_package_config_frontend_port ? process.env.npm_package_config_frontend_port : 3000;
+const BACKEND_PORT = process.env.npm_package_config_backend_port ? process.env.npm_package_config_backend_port : 3001;
 
 export default {
   debug: DEVMODE,
@@ -24,8 +25,8 @@ export default {
   entry: DEVMODE ? [
     'webpack/hot/dev-server',
     `webpack-dev-server/client?http://localhost:${DEVSERVER_PORT}/`,
-    './src/index'
-  ] : ['./src/index'],
+    './src/front/index'
+  ] : ['./src/front/index'],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: __dirname + '/dist/assets',
@@ -52,23 +53,33 @@ export default {
   ],
   module: {
     loaders: [
-      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
+      {test: /\.js$/, include: path.join(__dirname, 'src', 'front'), loaders: ['babel', 'eslint']},
       {test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file']},
       DEVMODE ? { // debug css/scss config
           test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
         } : { // production css/scss config
           test: /(\.css|\.scss)$/,
-          include: path.join(__dirname, 'src'),
+          include: path.join(__dirname, 'src', 'front'),
           loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")
         }
     ]
   },
   devServer: {
-    contentBase: __dirname + '/src',
+    contentBase: __dirname + '/src/front',
     historyApiFallback: true,
     hot: true,
     noInfo: true,
     colors: true,
-    port: DEVSERVER_PORT
+    port: DEVSERVER_PORT,
+    proxy: {
+      '/api*': {
+        target: `http://localhost:${BACKEND_PORT}`,
+        secure: false
+        // bypass: function(req, res, proxyOptions) {
+        //   if (req.headers.accept.indexOf('html') !== -1) {
+        //     return '/index.html';
+        // }
+      }
+    }
   }
 };
