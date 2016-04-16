@@ -21,6 +21,7 @@
     "build:front": "NODE_ENV=production babel-node node_modules/.bin/webpack --progress",
     "docker:build": "npm run build && docker build -t $npm_package_name .",
     "docker:run": "docker run --rm -it --name $npm_package_name $npm_package_name",
+    "docker:ip": "docker inspect --format '{{ .NetworkSettings.IPAddress }}' $npm_package_name",
     "lint:tools": "eslint webpack.config.js tools",
     "test": "mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
     "test:watch": "npm run test -- --watch"

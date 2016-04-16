@@ -8,6 +8,7 @@ Significant changes:
 * Use a single webpack config file
 * Use webpack dev server in development rather than browser-sync to make things a bit simpler
 * Add a back-end API server
+* Support deployment via Docker
 
 Development
 -----------
@@ -58,6 +59,11 @@ Or if you like Docker, you can do:
 
     npm run docker:build  # build a docker image and tag it with the name of the package
     npm run docker:run    # run the previously built and tagged docker image in a container named after the package
+    npm run docker:ip     # show the IP address of the running docker container
+
+Once the container is running, you should be able to browse to port 3000 on that IP and see your app; if you're on OSX
+it's a little more complicated: you should browse to the IP of your [docker-machine](https://docs.docker.com/machine/)
+VM instead.
 
 ## Initial Machine Setup
 
