@@ -1,5 +1,17 @@
+// @flow
 import mathHelper from './mathHelper';
 import NumberFormatter from './numberFormatter';
+
+type MilesDrivenTimeframe = 'week' | 'month' | 'year';
+
+type Settings = {
+    milesDrivenTimeframe: MilesDrivenTimeframe;
+    newMpg: number;
+    tradeMpg: number;
+    newPpg: number;
+    tradePpg: number;
+    milesDriven: number;
+}
 
 //This file uses the factory function pattern instead of a class.
 //Just showing an alternative to using a class.
@@ -8,14 +20,14 @@ import NumberFormatter from './numberFormatter';
 //Could arguably be called FuelSavingCalculatorFactory.
 const fuelSavingsCalculator = function() {
     //private
-    const calculateMonthlyCost = function(milesDrivenPerMonth, ppg, mpg) {
+    const calculateMonthlyCost = function(milesDrivenPerMonth: number, ppg: number, mpg: number) {
         const gallonsUsedPerMonth = milesDrivenPerMonth / mpg;
         return gallonsUsedPerMonth * ppg;
     };
 
     //public
     return {
-        calculateMilesDrivenPerMonth: function(milesDriven, milesDrivenTimeframe) {
+        calculateMilesDrivenPerMonth: function(milesDriven: number, milesDrivenTimeframe: string) {
           const monthsPerYear = 12;
           const weeksPerYear = 52;
 
@@ -31,7 +43,7 @@ const fuelSavingsCalculator = function() {
             }
         },
 
-        calculateSavingsPerMonth: function(settings) {
+        calculateSavingsPerMonth: function(settings: Settings) {
             if (!settings.milesDriven) {
                 return 0;
             }
@@ -45,15 +57,15 @@ const fuelSavingsCalculator = function() {
         },
 
 
-        necessaryDataIsProvidedToCalculateSavings: function(settings) {
+        necessaryDataIsProvidedToCalculateSavings: function(settings: Settings) {
             return settings.newMpg > 0
                 && settings.tradeMpg > 0
                 && settings.newPpg > 0
                 && settings.tradePpg > 0
-                && settings.milesDriven > 0;
+                && settings.milesDriven> 0;
         },
 
-        calculateSavings: function(settings) {
+        calculateSavings: function(settings: Settings) {
             const monthlySavings = this.calculateSavingsPerMonth(settings);
 
             return {

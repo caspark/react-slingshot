@@ -1,3 +1,4 @@
+// @flow
 export default class DateHelper {
 	//See tests for desired format.
 	static getFormattedDateTime(date) {

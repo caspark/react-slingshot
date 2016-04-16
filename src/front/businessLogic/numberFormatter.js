@@ -1,7 +1,8 @@
+// @flow
 import MathHelper from './mathHelper';
 
 class NumberFormatter {
-	static getCurrencyFormattedNumber(value) {
+    static getCurrencyFormattedNumber(value) {
         if (value === null) {
             return '';
         }
@@ -10,7 +11,7 @@ class NumberFormatter {
         return '$' + value;
     }
 
-    static getFormattedNumber(value) {
+    static getFormattedNumber(value: string | number) {
         if (value === 0) {
             return 0;
         }
@@ -23,9 +24,9 @@ class NumberFormatter {
             return ''; //if it's not a number after scrubbing formatting, just return empty.
         }
 
-      let roundedValue = MathHelper.roundNumber(value, 2); //round if more than 2 decimal points
+        let roundedValue = MathHelper.roundNumber(value, 2); //round if more than 2 decimal points
         roundedValue = roundedValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //add commas for 1,000's. RegEx from http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
-      const roundedValueContainsDecimalPlace = (roundedValue.indexOf('.') !== -1);
+        const roundedValueContainsDecimalPlace = (roundedValue.indexOf('.') !== -1);
 
         if (roundedValueContainsDecimalPlace) {
           const numbersToTheRightOfDecimal = roundedValue.split('.')[1];
@@ -42,15 +43,19 @@ class NumberFormatter {
         return roundedValue;
     }
 
-    static isInt(n) {
+    static isInt(n: number | string) {
         if (n === '' || n === null) {
             return false;
         }
 
-        return n % 1 === 0;
+        if (typeof n === 'number') {
+            return n % 1 === 0;
+        } else {
+            return +n % 1 === 0;
+        }
     }
 
-  static scrubFormatting(value) {
+    static scrubFormatting(value): string {
         return value.toString().replace('$', '').replace(',', '').replace('.', '');
     }
 }

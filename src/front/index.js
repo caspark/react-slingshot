@@ -1,3 +1,4 @@
+// @flow
 /*eslint-disable import/default*/
 
 import React from 'react';

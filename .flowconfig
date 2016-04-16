@@ -12,3 +12,6 @@
 [libs]
 
 [options]
+# pretend that .scss and .css files are empty javascript modules, to avoid "module not found" errors for them
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/src/stubs/ScssFlowStub.js'
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/src/stubs/CssFlowStub.js'
