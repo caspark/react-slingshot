@@ -1,36 +1,66 @@
+// Allowing console calls below since this is a build file.
+/*eslint-disable no-console */
+
 import webpack from 'webpack';
 import path from 'path';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('development'),
-  __DEV__: true
-};
+let DEVMODE;
+if (process.env.NODE_ENV == 'production') {
+  DEVMODE = false;
+  console.log('Using PRODUCTION mode settings for Webpack')
+} else {
+  DEVMODE = true;
+  console.log('Using DEVELOPMENT mode settings for Webpack; set NODE_ENV=production to use production settings')
+}
+
+const DEVSERVER_PORT = 3000;
 
 export default {
-  debug: true,
-  devtool: 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
+  debug: DEVMODE,
+  // more info: https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
+  devtool: DEVMODE ? 'cheap-module-eval-source-map' : 'source-map',
   noInfo: true, // set to false to see a list of every file being bundled.
-  entry: [
+  entry: DEVMODE ? [
     'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:3000/',
+    `webpack-dev-server/client?http://localhost:${DEVSERVER_PORT}/`,
     './src/index'
-  ],
+  ] : ['./src/index'],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: __dirname + '/dist',
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [
-    new webpack.DefinePlugin(GLOBALS), //Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
+  plugins: DEVMODE ? [ // debug plugins
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      __DEV__: true
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
+  ] : [ // production plugins
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.DefinePlugin({
+        // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
+        'process.env.NODE_ENV': JSON.stringify('production'),
+        __DEV__: false
+      }),
+      new ExtractTextPlugin('styles.css'),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
     loaders: [
       {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
       {test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file']},
-      {test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']}
+      DEVMODE ? { // debug css/scss config
+          test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+        } : { // production css/scss config
+          test: /(\.css|\.scss)$/,
+          include: path.join(__dirname, 'src'),
+          loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")
+        }
     ]
   },
   devServer: {
@@ -39,6 +69,6 @@ export default {
     hot: true,
     noInfo: true,
     colors: true,
-    port: 3000
+    port: DEVSERVER_PORT
   }
 };
