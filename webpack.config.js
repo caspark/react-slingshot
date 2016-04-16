@@ -8,10 +8,10 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 let DEVMODE;
 if (process.env.NODE_ENV == 'production') {
   DEVMODE = false;
-  console.log('Using PRODUCTION mode settings for Webpack')
+  console.log('Using PRODUCTION mode settings for Webpack');
 } else {
   DEVMODE = true;
-  console.log('Using DEVELOPMENT mode settings for Webpack; set NODE_ENV=production to use production settings')
+  console.log('Using DEVELOPMENT mode settings for Webpack; set NODE_ENV=production to use production settings');
 }
 
 const DEVSERVER_PORT = 3000;
