@@ -23,7 +23,7 @@
     "docker:build": "npm run build && cp Dockerfile dist/ && docker build -t $npm_package_name dist/",
     "docker:run": "docker run --rm -it --name $npm_package_name $npm_package_name",
     "docker:ip": "docker inspect --format '{{ .NetworkSettings.IPAddress }}' $npm_package_name",
-    "flow:list-exclusions:color": "echo 'Flow type checker: the following files are missing \"// @flow\" as their first line so they will be excluded from type-checking:' && tools/flow-list-exclusions.sh --color",
+    "flow:list-exclusions:color": "tools/flow-list-exclusions.sh --pretty",
     "flow:check:true": "echo 'Flow type checker: checking for type errors...' && flow status || true",
     "lint:tools": "eslint webpack.config.js tools",
     "test": "echo 'Running tests via mocha' && mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
