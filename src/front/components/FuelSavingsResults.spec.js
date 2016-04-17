@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
@@ -28,11 +29,11 @@ describe('<FuelSavingsResults />', () => {
                       };
 
       const wrapper = shallow(<FuelSavingsResults savings={savings}/>);
-      
+
       const actual = wrapper.find('.savings').length;
       const expected = 3;
 
-      expect(actual).to.equal(expected);  
+      expect(actual).to.equal(expected);
     });
 
     it('should display loss when savings don\'t exist', () => {
@@ -49,7 +50,7 @@ describe('<FuelSavingsResults />', () => {
 
       expect(actual).to.equal(expected);
     });
-  
+
     it('should give values a \'loss\' class when savings don\'t exist', () => {
       const savings = {
                         monthly: '-10',

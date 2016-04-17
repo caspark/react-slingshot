@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
@@ -28,8 +29,8 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
@@ -68,8 +69,8 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
@@ -79,7 +80,7 @@ describe('<FuelSavingsForm />', () => {
 
     expect(wrapper.find('select').childAt(0).html()).to.equal(expectedOption1);
     expect(wrapper.find('select').childAt(1).html()).to.equal(expectedOption2);
-    expect(wrapper.find('select').childAt(2).html()).to.equal(expectedOption3); 
+    expect(wrapper.find('select').childAt(2).html()).to.equal(expectedOption3);
   });
 
   it('should contain <FuelSavingsResults /> when necessary conditions are met', () => {
@@ -102,8 +103,8 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
@@ -132,8 +133,8 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
@@ -162,12 +163,12 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
-    
+
     expect(saveFuelSavings.calledOnce).to.be.false;
     wrapper.find('input[type="submit"]').simulate('click');
     expect(saveFuelSavings.calledOnce).to.be.true;
@@ -193,12 +194,12 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
-       
+
     wrapper.find('input[type="submit"]').simulate('click');
     expect(saveFuelSavings.args[0][0]).to.equal(appState);
   });
@@ -224,12 +225,12 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);
-    
+
     expect(calculateFuelSavings.calledOnce).to.be.false;
     wrapper.find(FuelSavingsTextInput).first().simulate('change');
     expect(calculateFuelSavings.calledOnce).to.be.true;
@@ -255,8 +256,8 @@ describe('<FuelSavingsForm />', () => {
       }
     };
 
-    const wrapper = shallow(<FuelSavingsForm 
-                              saveFuelSavings={saveFuelSavings} 
+    const wrapper = shallow(<FuelSavingsForm
+                              saveFuelSavings={saveFuelSavings}
                               calculateFuelSavings={calculateFuelSavings}
                               appState={appState}
                             />);

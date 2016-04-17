@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { expect } from 'chai';
 import * as ActionCreators from './fuelSavingsActions';
@@ -33,7 +34,7 @@ describe('Actions', function() {
 
   it('should create an action to calculate fuel savings', function() {
     const fieldName = 'newMpg';
-    const value = 100;
+    const value = '100';
 
     const expected = {
       type: ActionTypes.CALCULATE_FUEL_SAVINGS,
