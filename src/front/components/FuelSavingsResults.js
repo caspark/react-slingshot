@@ -8,7 +8,7 @@ import NumberFormatter from '../businessLogic/numberFormatter';
 const FuelSavingsResults = ({savings}) => {
   // console.log(savings);
   // console.log("typeof", typeof(savings.monthly));
-  const savingsExist = NumberFormatter.scrubFormatting(savings.monthly) > 0;
+  const savingsExist = +NumberFormatter.scrubFormatting(savings.monthly) > 0;
   const savingsClass = savingsExist ? 'savings' : 'loss';
   const resultLabel = savingsExist ? 'Savings' : 'Loss';
 

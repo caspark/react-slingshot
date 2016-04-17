@@ -10,8 +10,10 @@
 ; the whole root directory is automatically included
 
 [libs]
+; Use to tell flow about available global variables or functions - see http://flowtype.org/docs/declarations.html
+src/_flow/declarations
 
 [options]
 # pretend that .scss and .css files are empty javascript modules, to avoid "module not found" errors for them
-module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/src/stubs/ScssFlowStub.js'
-module.name_mapper.extension='css' -> '<PROJECT_ROOT>/src/stubs/CssFlowStub.js'
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/src/_flow/stubs/ScssFlowStub.js'
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/src/_flow/stubs/CssFlowStub.js'
