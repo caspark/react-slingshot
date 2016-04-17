@@ -14,7 +14,7 @@ export type SaveFuelSavingsAction = {
 }
 
 export function saveFuelSavings(settings: SettingsForAction): SaveFuelSavingsAction {
-	return { type: types.SAVE_FUEL_SAVINGS, settings };
+  return { type: types.SAVE_FUEL_SAVINGS, settings };
 }
 
 export type CalculateFuelSavingsAction = {
@@ -25,5 +25,5 @@ export type CalculateFuelSavingsAction = {
 }
 
 export function calculateFuelSavings(settings: SettingsForAction, fieldName: string, value: string): CalculateFuelSavingsAction {
-	return { type: types.CALCULATE_FUEL_SAVINGS, settings, fieldName, value };
+  return { type: types.CALCULATE_FUEL_SAVINGS, settings, fieldName, value };
 }
