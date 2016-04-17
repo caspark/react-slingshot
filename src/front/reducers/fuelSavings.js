@@ -1,6 +1,5 @@
 // @flow
-import {SAVE_FUEL_SAVINGS, CALCULATE_FUEL_SAVINGS} from '../constants/actionTypes';
-import type {KnownAction} from '../actions/fuelSavingsActions';
+import * as Actions from '../actions/fuelSavingsActions';
 import calculator from '../businessLogic/fuelSavingsCalculator';
 import dateHelper from '../businessLogic/dateHelper';
 import objectAssign from 'object-assign';
@@ -46,14 +45,14 @@ const initialState: FuelSavingsState = {
 //create a copy of the state passed and set new values on the copy.
 //Note that I'm using Object.assign to create a copy of current state
 //and update values on the copy.
-export default function fuelSavingsAppState(state: FuelSavingsState = initialState, action: KnownAction) {
+export default function fuelSavingsAppState(state: FuelSavingsState = initialState, action: Actions.KnownAction) {
   switch (action.type) {
-    case SAVE_FUEL_SAVINGS:
+    case Actions.ActionTypes.SAVE_FUEL_SAVINGS:
       // For this example, just simulating a save by changing date modified.
       // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
       return objectAssign({}, state, { dateModified: dateHelper.getFormattedDateTime(new Date()) });
 
-    case CALCULATE_FUEL_SAVINGS:
+    case Actions.ActionTypes.CALCULATE_FUEL_SAVINGS:
     { // limit scope with this code block, to satisfy eslint no-case-declarations rule.
       let newState = objectAssign({}, state);
       newState[action.fieldName] = action.value;

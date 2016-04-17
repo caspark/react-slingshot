@@ -1,5 +1,5 @@
 // @flow
-import * as ActionTypes from '../constants/actionTypes';
+import { ActionTypes } from '../actions/fuelSavingsActions';
 import { createStore } from 'redux';
 import { expect } from 'chai';
 import rootReducer from '../reducers';

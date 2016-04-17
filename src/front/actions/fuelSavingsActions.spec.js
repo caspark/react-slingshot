@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { expect } from 'chai';
-import * as ActionCreators from './fuelSavingsActions';
-import * as ActionTypes from '../constants/actionTypes';
+import * as Actions from './fuelSavingsActions';
 
 describe('Actions', function() {
   const appState = {
@@ -24,11 +23,11 @@ describe('Actions', function() {
 
   it('should create an action to save fuel savings', function() {
     const expected = {
-      type: ActionTypes.SAVE_FUEL_SAVINGS,
+      type: Actions.ActionTypes.SAVE_FUEL_SAVINGS,
       settings: appState
     };
 
-    expect(ActionCreators.saveFuelSavings(appState)).to.deep.equal(expected); // Notice use of deep because it's a nested object
+    expect(Actions.saveFuelSavings(appState)).to.deep.equal(expected); // Notice use of deep because it's a nested object
     // expect(ActionCreators.saveFuelSavings(appState)).to.equal(expected); // Fails. Not deeply equal
   });
 
@@ -37,12 +36,12 @@ describe('Actions', function() {
     const value = '100';
 
     const expected = {
-      type: ActionTypes.CALCULATE_FUEL_SAVINGS,
+      type: Actions.ActionTypes.CALCULATE_FUEL_SAVINGS,
       settings: appState,
       fieldName: fieldName,
       value: value
     };
 
-    expect(ActionCreators.calculateFuelSavings(appState, fieldName, value)).to.deep.equal(expected);
+    expect(Actions.calculateFuelSavings(appState, fieldName, value)).to.deep.equal(expected);
   });
 });

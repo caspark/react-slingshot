@@ -1,6 +1,9 @@
 // @flow
 
-import * as types from '../constants/actionTypes';
+export const ActionTypes = {
+  SAVE_FUEL_SAVINGS: 'SAVE_FUEL_SAVINGS',
+  CALCULATE_FUEL_SAVINGS: 'CALCULATE_FUEL_SAVINGS'
+};
 
 export type KnownAction = SaveFuelSavingsAction | CalculateFuelSavingsAction;
 
@@ -14,7 +17,7 @@ export type SaveFuelSavingsAction = {
 }
 
 export function saveFuelSavings(settings: SettingsForAction): SaveFuelSavingsAction {
-  return { type: types.SAVE_FUEL_SAVINGS, settings };
+  return { type: ActionTypes.SAVE_FUEL_SAVINGS, settings };
 }
 
 export type CalculateFuelSavingsAction = {
@@ -25,5 +28,5 @@ export type CalculateFuelSavingsAction = {
 }
 
 export function calculateFuelSavings(settings: SettingsForAction, fieldName: string, value: string): CalculateFuelSavingsAction {
-  return { type: types.CALCULATE_FUEL_SAVINGS, settings, fieldName, value };
+  return { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings, fieldName, value };
 }

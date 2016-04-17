@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { expect } from 'chai';
-import * as ActionTypes from '../constants/actionTypes';
 import * as Actions from '../actions/fuelSavingsActions';
 import reducer from './fuelSavings';
 import type {FuelSavingsState} from './fuelSavings';
